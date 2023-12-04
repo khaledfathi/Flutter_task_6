@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task_l5/views/login/login_screen.dart';
+import 'package:task_l5/controllers/loading/loading_controller.dart';
+import 'package:task_l5/views/loading/components/center_logo.dart';
 
 class LoadingScreen extends StatelessWidget {
   static const route = 'lodaing';
@@ -7,24 +8,11 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(microseconds: 500), ()=>Navigator.pushReplacementNamed(context, LoginScreen.route));
-    return const Scaffold(
-      body: Center(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                  padding: EdgeInsets.only(bottom: 50),
-                  child: Icon(
-                    Icons.watch_later_outlined,
-                    size: 100,
-                  )),
-              CircularProgressIndicator(),
-            ],
-          ),
-        ),
-      ),
+    //fake delay     
+    LoadingController().loadingDelay(context,seconds: 1); 
+
+    return const Scaffold(    
+      body: CenterLogo(),
     );
   }
 }
