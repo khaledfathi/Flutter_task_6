@@ -5,12 +5,14 @@ class CustomTextField extends StatelessWidget {
   final String? hintText; 
   final EdgeInsets? margin; 
   final TextEditingController? controller;
+  final bool? obscureText ; 
 
   const CustomTextField({super.key , 
     this.title,
     this.hintText,
     this.margin,
-    this.controller
+    this.controller,
+    this.obscureText,
   });
 
   @override
@@ -34,10 +36,11 @@ class CustomTextField extends StatelessWidget {
               ]
             ),
             child: TextField(              
+              obscureText: obscureText??false ,
               controller: controller,
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: hintText
+                hintText: hintText,                
               ),              
             ),
           ),

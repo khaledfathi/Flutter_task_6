@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:task_l5/views/shared/custom_text_field.dart';
-import 'package:task_l5/views/login/components/submit_section.dart';
-import 'package:task_l5/views/login/components/social_media_button.dart';
 
-class LoginForm extends StatelessWidget {
+class SignUpForm extends StatelessWidget {
+  final TextEditingController? nameController;
   final TextEditingController? emailController;
   final TextEditingController? passwordController;
 
   final EdgeInsets? margin;
-  final void Function() onTapForgetPassword;
-  final void Function() onTapLogin;
   final void Function() onTapSignUp;
-  final void Function(bool? val)? onChangeCheckBox;
-  final bool? checkBoxValue;
+  final void Function() onTapSignin;
 
-  const LoginForm({
+  const SignUpForm({
     super.key,
     this.margin,
+    this.nameController,
     this.emailController,
     this.passwordController,
-    this.checkBoxValue,
-    this.onChangeCheckBox,
-    required this.onTapForgetPassword,
-    required this.onTapLogin,
     required this.onTapSignUp,
+    required this.onTapSignin,
   });
 
   @override
@@ -33,27 +27,36 @@ class LoginForm extends StatelessWidget {
         child: Column(
           children: [
             CustomTextField(
+              title: 'Name',
+              hintText: 'Please enter your name',
+              margin: const EdgeInsets.only(bottom: 10),
+              controller: nameController,
+            ),
+            CustomTextField(
               title: 'Email',
-              hintText: 'e.g name@example.com',
+              hintText: 'Please enter your email',
               margin: const EdgeInsets.only(bottom: 10),
               controller: emailController,
             ),
             CustomTextField(
               title: 'Password',
-              hintText: 'e.g ************',
+              hintText: 'Please enter your password',
               margin: const EdgeInsets.only(bottom: 10),
-              controller: passwordController,
               obscureText: true,
+              controller: passwordController,
             ),
-            SubmitSection(
-              checkBoxValue: checkBoxValue ?? true,
-              onTapForgetPassword: onTapForgetPassword,
-              onChangeCheckBox: onChangeCheckBox,
-              onTapLogin: onTapLogin,
-            ),
-            const SocialMediaButons(
-              margin: EdgeInsets.only(top: 20),
-            ),
+            Container(
+                margin: const EdgeInsets.symmetric(vertical: 15),
+                width: double.infinity,
+                height: 50,
+                child: MaterialButton(
+                  onPressed: onTapSignUp,
+                  color: Colors.deepPurple,
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )),
             Expanded(
                 child: Stack(
               children: [
@@ -64,12 +67,12 @@ class LoginForm extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          'Don\'t have an account?',
+                          'Already have an account?',
                           style: TextStyle(fontSize: 16),
                         ),
                         TextButton(
-                            onPressed: onTapSignUp,
-                            child: const Text('SignUp',
+                            onPressed: onTapSignin,
+                            child: const Text('Signin',
                                 style: TextStyle(fontSize: 16))),
                       ],
                     ),

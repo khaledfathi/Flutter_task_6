@@ -6,7 +6,7 @@ const List<String> SCHEMA = [
         "name"	TEXT NOT NULL,
         "password"	TEXT NOT NULL,
         "email"	TEXT NOT NULL UNIQUE,
-        "cart"	TEXT NOT NULL UNIQUE,
+        "cart"	TEXT ,
         PRIMARY KEY("id" AUTOINCREMENT)
       );
   ''',

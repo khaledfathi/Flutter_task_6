@@ -55,6 +55,6 @@ Future _showError (BuildContext context,  String error){
     barrierDismissible: false,
     context: context,
     builder: (context){
-      return const AlertErrorScreen(error: 'Invalid User name or password'); 
+      return const AlertErrorScreen(message: 'Invalid User name or password'); 
     });
 }

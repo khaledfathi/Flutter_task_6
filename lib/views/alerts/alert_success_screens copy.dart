@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 
-class AlertErrorScreen extends StatelessWidget {
+class AlertSuccessScreen extends StatelessWidget {
   final String message; 
+  final void Function () onPress; 
   static String route = 'alert-error';
-  const AlertErrorScreen({super.key,
+  const AlertSuccessScreen({super.key,
     required this.message,
+    required this.onPress,
   });
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       icon: const Icon(
-        Icons.dangerous,
-        color: Colors.red,
+        Icons.info_outline_rounded,
+        color: Colors.blue,
       ),
       title: Text(message),
       titleTextStyle: const TextStyle(fontSize: 16 , color: Colors.black),
       actionsAlignment: MainAxisAlignment.center,
       actions: [
         ElevatedButton(
-            onPressed: () => Navigator.of(context).pop(), child: Text('Ok')),
+            onPressed: onPress,
+            child: Text('ok'),
+        ),
       ],
     );
   }
