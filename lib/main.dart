@@ -9,6 +9,7 @@ import 'package:task_l5/views/verification/verification_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await globals.db.initDB();
+  await globals.db.recreateDatabase(); 
   runApp(const App());
 }
 
@@ -22,7 +23,7 @@ class App extends StatelessWidget {
       initialRoute: LoadingScreen.route,
       routes: {
         //pages
-        LoadingScreen.route: (context) => const LoadingScreen(),
+        LoadingScreen.route: (context) => LoadingScreen(),
         LoginScreen.route: (context) => const LoginScreen(),
         HomeScreen.route: (context) => const HomeScreen(),
         SignUpScreen.route: (context) => const SignUpScreen(),

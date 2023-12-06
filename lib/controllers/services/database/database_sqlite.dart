@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:task_l5/controllers/services/constants/database_constants.dart';
@@ -8,7 +9,7 @@ class DatabaseSqlite {
   String _tableName = '';
   int version = 1;
 
-  Future<Database> connect() async {
+  Future<Database> _connect() async {
     String databasePath = await getDatabasesPath();
     String path = join(databasePath, DATABASE_NAME);
     Database currentDB =
@@ -21,13 +22,13 @@ class DatabaseSqlite {
       for (String table in SCHEMA) {
         await db.execute(table);
       }
-      print("OnCreate : build database [ok]");
+      debugPrint("OnCreate : build database [ok]");
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
-  Future<void> disconnect() async {
+  Future<void> _disconnect() async {
     if (db != null) {
       await db!.close();
       db = null ; 
@@ -35,22 +36,22 @@ class DatabaseSqlite {
   }
 
   Future initDB() async {
-    db = db == null ? await connect() : null;
+    db = db == null ? await _connect() : null;
   }
 
-  Future dropDatabase() async {
+  Future _dropDatabase() async {
     try {
       await databaseFactory
           .deleteDatabase(join(await getDatabasesPath(), DATABASE_NAME));
-      print("Drop Database : [ok]");
+      debugPrint("Drop Database : [ok]");
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
   Future recreateDatabase() async {
-    await dropDatabase();
-    await disconnect();
+    await _dropDatabase();
+    await _disconnect();
     await initDB();
   }
 

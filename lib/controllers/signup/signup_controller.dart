@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_l5/controllers/services/validation/validation.dart';
-import 'package:task_l5/models/user_model.dart';
+import 'package:task_l5/controllers/verification/verification_args.dart';
 import 'package:task_l5/views/alerts/alert_error_screens.dart';
-import 'package:task_l5/views/alerts/alert_success_screens%20copy.dart';
-import 'package:task_l5/views/login/login_screen.dart';
+import 'package:task_l5/views/verification/verification_screen.dart';
 
 class SignUpController {
   late String _name;
@@ -17,17 +16,9 @@ class SignUpController {
     _email = email;
     _password = password;
     _sanatizing();
-    _validate().then((valid){
-      if (valid) {
-        //store data into database
-        _storeNewUser()
-            .then((_) => _showSuccess(context, 'Register Completed'));
-      } else {
-        _showError(context, 'Invalid inputs or Email already exist');
-      }
+    _validate().then((valid) {
+      valid ? _goToVerificationScreen(context) : _showError(context);
     });
-    //do signup first
-    // Navigator.of(context).pushNamed(VerificationScreen.route);
   }
 
   void signIn(BuildContext context) {
@@ -52,29 +43,16 @@ class SignUpController {
     return nameValid && emailValid && passwordValid;
   }
 
-  void _showError(BuildContext context, String message) {
+  void _showError(BuildContext context) {
     showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (context) => AlertErrorScreen(message: message));
+        builder: (context) =>
+            const AlertErrorScreen(message: 'Invalid inputs or already exist'));
   }
 
-  void _showSuccess(BuildContext context, String message) {
-    showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) => AlertSuccessScreen(
-              message: message,
-              onPress: () => Navigator.of(context)
-                  .pushNamedAndRemoveUntil(LoginScreen.route, (route) => false),
-            ));
-  }
-
-  Future<void> _storeNewUser() async {
-    await UserModel().insert({
-      'name': _name,
-      'email': _email,
-      'password': _password,
-    });
+  void _goToVerificationScreen(context) {
+    Navigator.of(context).pushReplacementNamed(VerificationScreen.route,
+        arguments: VerificationArgs(_name, _email, _password));
   }
 }

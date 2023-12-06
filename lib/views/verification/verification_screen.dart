@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
-import 'package:task_l5/controllers/verification/verification.dart';
+import 'package:task_l5/controllers/verification/verification_controller.dart';
+import 'package:task_l5/controllers/verification/verification_args.dart';
 
 class VerificationScreen extends StatefulWidget {
   static const String route = 'verification';
@@ -11,18 +12,30 @@ class VerificationScreen extends StatefulWidget {
 }
 
 class _VerificationScreenState extends State<VerificationScreen> {
-  VerificationController controller = VerificationController(); 
+  //screen controller
+  final VerificationController _controller = VerificationController();
+
+  //values
+  String? _verifyCode; 
+
+  //screen sizes
+  late double _screenHight;
+  late double _screenWidth;
+
+  //screen args
+  late VerificationArgs _args;
 
   @override
   Widget build(BuildContext context) {
-    double screenHight = MediaQuery.sizeOf(context).height;
-    double screenWidth = MediaQuery.sizeOf(context).width;
+    _useArgs(context);
+    _setMediaQuerySizes(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(),
       body: Container(
-        width: screenWidth,
-        height: screenHight,
+        width: _screenWidth,
+        height: _screenHight,
         margin: const EdgeInsets.all(20),
         child: Column(
           children: [
@@ -39,15 +52,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
               child: const Text('Please enter the OTP code sent to you by SMS'),
             ),
             Container(
-              width: screenWidth * 0.8,
+              width: _screenWidth * 0.8,
               margin: const EdgeInsets.only(top: 100),
-              child: PinCodeFields(
+              child: PinCodeFields(                
                 length: 4,
                 fieldWidth: 10,
                 fieldBorderStyle: FieldBorderStyle.square,
                 borderRadius: BorderRadius.circular(10),
-                onComplete: (text) {
-                  print(text);
+                onComplete: (code) {
+                  _verifyCode = code;  
                 },
               ),
             ),
@@ -69,8 +82,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         width: double.infinity,
                         color: Colors.deepPurpleAccent,
                         child: MaterialButton(
-                          onPressed: ()=>controller.verify(context),
-                          child: const Text('Verify' , style: TextStyle(color: Colors.white),),
+                          onPressed: () => _controller.verify(context, _verifyCode , _args),
+                          child: const Text(
+                            'Verify',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         )),
                   ),
                 ],
@@ -80,5 +96,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
         ),
       ),
     );
+  }
+
+  void _setMediaQuerySizes(BuildContext context) {
+    _screenHight = MediaQuery.sizeOf(context).height;
+    _screenWidth = MediaQuery.sizeOf(context).width;
+  }
+
+  void _useArgs(BuildContext context) {
+    _args = ModalRoute.of(context)!.settings.arguments as VerificationArgs;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:task_l5/controllers/services/globals/singleton.dart' as globals;
 
 abstract class Model<T>{
@@ -38,7 +39,7 @@ abstract class Model<T>{
     try {
       return globals.db.table(tableName).insert(row); 
     } catch (e) {
-     print (e); 
+     debugPrint (e.toString()); 
     }
     return 0 ; 
   }
@@ -47,7 +48,7 @@ abstract class Model<T>{
     try {
      return globals.db.table(tableName).update(row, id); 
     } catch (e) {
-      print (e); 
+      debugPrint (e.toString()); 
     }
     return 0; 
   }
