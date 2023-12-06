@@ -25,19 +25,24 @@ class _LoginScreenState extends State<LoginScreen> {
   bool? _checkBoxValue;
 
   //screen sizes
-  late double _screenHight ; 
-  late double _screenWidth ; 
+  late double _screenHight;
+  late double _screenWidth;
 
-  //screen args 
-  late LoginArgs? _args ; 
+  //screen args
+  late LoginArgs? _args;
 
   @override
   Widget build(BuildContext context) {
-    _useArgs(context); 
-    _setMediaQuerySizes(context); 
+    _useArgs(context);
+    _setMediaQuerySizes(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      floatingActionButton: FloatingActionButton(
+        onPressed: ()=>_controller.goToUsersScreen(context),
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.storage_rounded),
+      ),
       appBar: AppBar(
         toolbarHeight: 20,
       ),
@@ -64,15 +69,18 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _setMediaQuerySizes (BuildContext context){
+  void _setMediaQuerySizes(BuildContext context) {
     _screenHight = MediaQuery.sizeOf(context).height;
     _screenWidth = MediaQuery.sizeOf(context).width;
   }
-  void _useArgs(BuildContext context){
+
+  void _useArgs(BuildContext context) {
     try {
-       _args = ModalRoute.of(context)!.settings.arguments as LoginArgs;
+      _args = ModalRoute.of(context)!.settings.arguments as LoginArgs;
       _emailController.text = _args!.email;
       _passwordController.text = _args!.password;
-    } catch (e) {null;}
+    } catch (e) {
+      null;
+    }
   }
 }

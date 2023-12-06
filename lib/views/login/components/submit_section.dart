@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class SubmitSection extends StatelessWidget {
   final void Function() onTapForgetPassword;
-  final void Function() onTapLogin; 
+  final void Function() onTapLogin;
   final void Function(bool? val)? onChangeCheckBox;
   final bool checkBoxValue;
 
   const SubmitSection({
     super.key,
     required this.onTapForgetPassword,
-    required this.onTapLogin, 
+    required this.onTapLogin,
     this.onChangeCheckBox,
     this.checkBoxValue = true,
   });
@@ -23,7 +23,7 @@ class SubmitSection extends StatelessWidget {
           children: [
             Row(
               children: [
-                Checkbox(value: checkBoxValue, onChanged:onChangeCheckBox),
+                Checkbox(value: checkBoxValue, onChanged: onChangeCheckBox),
                 const Text('Remember me'),
               ],
             ),
@@ -33,13 +33,14 @@ class SubmitSection extends StatelessWidget {
           ],
         ),
         Container(
-          margin: const EdgeInsets.symmetric(vertical: 15),
+            margin: const EdgeInsets.symmetric(vertical: 15),
             width: double.infinity,
             height: 50,
-            child: MaterialButton(              
+            child: MaterialButton(
               onPressed: onTapLogin,
               color: Colors.deepPurple,
-              child: const Text('Login', 
+              child: const Text(
+                'Login',
                 style: TextStyle(color: Colors.white),
               ),
             ))

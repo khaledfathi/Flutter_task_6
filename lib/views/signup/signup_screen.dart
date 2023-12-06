@@ -13,36 +13,46 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  SignUpController controller = SignUpController();
+  //screen controller
+  final SignUpController _controller = SignUpController();
 
-  TextEditingController nameController = TextEditingController(); 
-  TextEditingController emailController = TextEditingController(); 
-  TextEditingController passwordController = TextEditingController(); 
+  //input controllers
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  //screen sizes
+  late double _screenHight;
+  late double _screenWidth;
 
   @override
   Widget build(BuildContext context) {
-    double screenHight = MediaQuery.sizeOf(context).height;
-    double screenWidth = MediaQuery.sizeOf(context).width;
+    _setMediaQuerySizes(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: BaseAuthUI(
-        screenWidth: screenWidth,
-        screenHight: screenHight,
+        screenWidth: _screenWidth,
+        screenHight: _screenHight,
         title: 'Sign Up',
         subtitle: 'Please enter your information below to sign up',
         child: SignUpForm(
-          nameController: nameController,
-          emailController: emailController,
-          passwordController: passwordController,
-          onTapSignUp: () => controller.signUp(context,
-              name: nameController.text,
-              email: emailController.text,
-              password:passwordController.text
-            ),
-          onTapSignin: () => controller.signIn(context),
+          nameController: _nameController,
+          emailController: _emailController,
+          passwordController: _passwordController,
+          onTapSignUp: () => _controller.signUp(context,
+              name: _nameController.text,
+              email: _emailController.text,
+              password: _passwordController.text),
+          onTapSignin: () => _controller.signIn(context),
         ),
       ),
     );
+  }
+
+  void _setMediaQuerySizes(BuildContext context) {
+    _screenHight = MediaQuery.sizeOf(context).height;
+    _screenWidth = MediaQuery.sizeOf(context).width;
   }
 }

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:task_l5/controllers/login/login_args.dart';
 import 'package:task_l5/controllers/verification/verification_args.dart';
 import 'package:task_l5/models/user_model.dart';
-import 'package:task_l5/views/alerts/alert_error_screens.dart';
-import 'package:task_l5/views/alerts/alert_success_screens%20copy.dart';
 import 'package:task_l5/views/login/login_screen.dart';
+import 'package:task_l5/views/shared/alerts/alert_error.dart';
+import 'package:task_l5/views/shared/alerts/alert_success.dart';
 
 class VerificationController {
   late String _name;
@@ -15,7 +15,7 @@ class VerificationController {
     // recive args
     _name = args.name;
     _email = args.email;
-    _password = args.email;
+    _password = args.password;
     //
     if (verifyCode == '1234') {
       _storeNewUser().then((_) {
@@ -31,13 +31,13 @@ class VerificationController {
   void _showError(BuildContext context) {
     showDialog(
         context: context,
-        builder: (context) => const AlertErrorScreen(message: 'Invalid code'));
+        builder: (context) => const AlertError(message: 'Invalid code'));
   }
 
   Future _showSuccess(BuildContext context) {
     return showDialog(
         context: context,
-        builder: (context) => AlertSuccessScreen(
+        builder: (context) => AlertSuccess(
               message: 'Register Completed',
               onPress: () => Navigator.of(context).pop(),
             ));

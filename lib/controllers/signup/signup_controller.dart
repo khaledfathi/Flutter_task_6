@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_l5/controllers/services/validation/validation.dart';
 import 'package:task_l5/controllers/verification/verification_args.dart';
-import 'package:task_l5/views/alerts/alert_error_screens.dart';
+import 'package:task_l5/views/shared/alerts/alert_error.dart';
 import 'package:task_l5/views/verification/verification_screen.dart';
 
 class SignUpController {
@@ -48,7 +48,7 @@ class SignUpController {
         barrierDismissible: false,
         context: context,
         builder: (context) =>
-            const AlertErrorScreen(message: 'Invalid inputs or already exist'));
+            const AlertError(message: 'Invalid inputs or already exist'));
   }
 
   void _goToVerificationScreen(context) {

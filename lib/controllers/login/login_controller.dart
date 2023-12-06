@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:task_l5/models/user_model.dart';
-import 'package:task_l5/views/alerts/alert_error_screens.dart';
+import 'package:task_l5/views/shared/alerts/alert_error.dart';
 import 'package:task_l5/views/home/home_screen.dart';
+import 'package:task_l5/views/users/users_screen.dart';
 
 class LoginController {
   void login(BuildContext context,
       {required String email, required String password}) {
     _attemp(email: email, password: password).then((login) {
       if (login) {
-        Navigator.pushReplacementNamed(context, HomeScreen.route);
+        _goToHomeScreen(context);
       } else {
         _showError(context, 'Invalid User Name or password');
       }
     });
+  }
+
+  void goToUsersScreen(BuildContext context) async {
+    Navigator.of(context).pushNamed(UsersScreen.route);
+  }
+
+  void _goToHomeScreen(BuildContext context) {
+    Navigator.pushReplacementNamed(context, HomeScreen.route);
   }
 
   Future<bool> _attemp(
@@ -41,8 +50,7 @@ class LoginController {
         barrierDismissible: false,
         context: context,
         builder: (context) {
-          return const AlertErrorScreen(
-              message: 'Invalid User name or password');
+          return const AlertError(message: 'Invalid User name or password');
         });
   }
 }

@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   sqflite: ^2.3.0
   flutter_pin_code_fields: ^2.2.0
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:
