@@ -6,6 +6,9 @@ class UserModel extends Model<UserModel> {
   String? name ; 
   String? email ; 
   String? password; 
+  String? phone;
+  String? country; 
+  String? image; 
   String? cart ; 
   
   UserModel({super.tableName = 'users' ,
@@ -13,11 +16,14 @@ class UserModel extends Model<UserModel> {
     this.name, 
     this.email,
     this.password,
+    this.phone, 
+    this.country,
+    this.image,
     this.cart,
   }); 
 
   @override
-  List<UserModel> createQueryModelList(queryResult) {
+  List<UserModel> createQueryModelList(List<Map<String, Object?>> queryResult){
     List<UserModel> records = [];
     for (var row in queryResult) {
       records.add(UserModel(
@@ -25,6 +31,9 @@ class UserModel extends Model<UserModel> {
         name: row['name'].toString(),
         email: row['email'].toString(),
         password: row['password'].toString(),
+        phone: row['phone'].toString(),
+        country: row['country'].toString(),
+        image: row['image'].toString(),
         cart: row['cart'].toString(),
       ));
     }

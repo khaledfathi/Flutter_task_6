@@ -29,6 +29,11 @@ class _UsersScreenState extends State<UsersScreen> {
       }),
       appBar: AppBar(
         title: const Text('Users List'),
+        actions: [
+          IconButton(onPressed: ()async{
+            await _controller.rebuildUsers().then((value) => setState((){}));
+          }, icon: const Icon(Icons.fiber_new_sharp ,size: 43, color: Colors.deepPurpleAccent,))
+        ],
       ),
       body: FutureBuilder(
           future: _controller.getAllUsers(),
@@ -47,6 +52,9 @@ class _UsersScreenState extends State<UsersScreen> {
                       name: users.data![index].name,
                       email: users.data![index].email,
                       password: users.data![index].password,
+                      phone: users.data![index].phone,
+                      counry: users.data![index].country,
+                      image: users.data![index].image,
                       onTap: () {
                         _controller
                             .deleteUser(users.data![index].id!)

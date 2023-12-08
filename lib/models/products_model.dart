@@ -2,6 +2,7 @@
 import 'package:task_l5/models/abstract/model.dart';
 
 class ProductModel extends Model<ProductModel> {
+  String? id; 
   String? name; 
   String? description; 
   String? price; 
@@ -10,6 +11,7 @@ class ProductModel extends Model<ProductModel> {
   String? categoryId; //FK
 
   ProductModel({super.tableName = 'Products' ,
+    this.id,
     this.name,
     this.description,
     this.price,
@@ -23,6 +25,7 @@ class ProductModel extends Model<ProductModel> {
     List<ProductModel> records = [];
     for (var row in queryResult) {
       records.add(ProductModel(
+        id: row['id'].toString(),
         name: row['name'].toString(),
         description: row['name'].toString(),
         price: row['name'].toString(),

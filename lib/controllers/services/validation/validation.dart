@@ -1,4 +1,4 @@
-import 'package:task_l5/controllers/services/globals/singleton.dart' as globals;
+import 'package:task_l5/controllers/services/globals/globals.dart' as globals;
 
 class Validation {
   String text;

@@ -1,3 +1,4 @@
+import 'package:task_l5/models/fake_records/fake_records.dart';
 import 'package:task_l5/models/user_model.dart';
 
 class UserController {
@@ -12,5 +13,9 @@ class UserController {
 
   Future<void> deleteAll() async {
     await UserModel().delete();
+  }
+
+  Future<void> rebuildUsers ()async{
+    await FakeRecords.createFakeUsers(); 
   }
 }

@@ -2,22 +2,29 @@ import 'package:task_l5/controllers/services/validation/validation.dart';
 import 'package:task_l5/models/user_model.dart';
 
 class Auth {
+  static UserModel? _currentUser; 
+
   Future<bool> login({required String email, required String password}) async {
     email = _loginSanatizing(email);
     bool login = false;
     await UserModel()
         .selectWhere('email = "$email" AND password= "$password"')
-        .then((queryResult) => {
+        .then((queryResult){
               if (queryResult.isNotEmpty)
                 {
                   if (queryResult[0].email == email &&
                       queryResult[0].password == password)
                     {
-                      login = true,
+                      _currentUser = queryResult[0];
+                      login = true; 
                     }
                 }
             });
     return login;
+  }
+  
+  void logout (){
+    _currentUser = UserModel(); 
   }
 
   Future<List<String>> signUpAttemp(
@@ -69,5 +76,13 @@ class Auth {
     passwordValid.isValid ? null : errors.add(passwordValid.errors) ;
 
     return errors.expand((element) => element).toList(); 
+  }
+
+  Future<void> refreshCurrentUser()async{
+    await UserModel().select(id:int.parse(_currentUser!.id!)).then((user) => _currentUser = user[0]); 
+  }
+
+  UserModel get currentUser {
+    return _currentUser!; 
   }
 }

@@ -23,9 +23,10 @@ class CenterLogo extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Text(
                 'Ecommerce UI Theme',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.deepPurple,
-                    fontSize: 30,
+                    fontSize: 25,
                     fontWeight: FontWeight.w900),
               ),
             ),

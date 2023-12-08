@@ -39,6 +39,8 @@ dependencies:
   sqflite: ^2.3.0
   flutter_pin_code_fields: ^2.2.0
   google_fonts: ^6.1.0
+  image_picker: ^1.0.4
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +69,8 @@ flutter:
     - assets/images/app_images/
     - assets/images/product_images/
     - assets/images/category_images/
+    - assets/images/user_images/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

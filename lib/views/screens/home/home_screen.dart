@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:task_l5/views/screens/home/components/home_app_bar.dart';
+import 'package:task_l5/views/screens/category/category_screen.dart';
 import 'package:task_l5/views/screens/profile/profile_screen.dart';
+import 'package:task_l5/views/screens/search/search_screen.dart';
+import 'package:task_l5/views/screens/store_screen/store_screen.dart';
+import 'package:task_l5/views/screens/wish_list/wish_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static String route = 'home';
-   HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -14,10 +17,10 @@ class _HomeScreenState extends State<HomeScreen> {
    int index = 0 ; 
 
   final List<Widget> screens =[
-    Container(width: double.infinity, height: double.infinity,color: Colors.red,),
-    Container(width: double.infinity, height: double.infinity,color: Colors.yellow,),
-    Container(width: double.infinity, height: double.infinity,color: Colors.green,),
-    Container(width: double.infinity, height: double.infinity,color: Colors.blue,),
+    StoreScreen(),
+    CategoryScreen(), 
+    SearchScreen(),
+    WishListScreen(),
     ProfileScreen(),
   ];
 
@@ -36,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() {});
           },
           items: const [
-            BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
+            BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.store)),
             BottomNavigationBarItem(label: 'Category', icon: Icon(Icons.category)),
             BottomNavigationBarItem(label: 'Search', icon: Icon(Icons.search)),
             BottomNavigationBarItem(label: 'Wish list', icon: Icon(Icons.heart_broken)),

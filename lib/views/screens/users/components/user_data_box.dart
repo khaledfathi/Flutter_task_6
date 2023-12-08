@@ -4,6 +4,9 @@ class UserDataBox extends StatelessWidget {
   final String? name;
   final String? email;
   final String? password;
+  final String? phone; 
+  final String? counry; 
+  final String? image; 
   final void Function()? onTap;
 
   const UserDataBox(
@@ -11,6 +14,9 @@ class UserDataBox extends StatelessWidget {
       this.name,
       this.email,
       this.password,
+      this.phone,
+      this.counry,
+      this.image,
       this.onTap
     });
 
@@ -37,6 +43,18 @@ class UserDataBox extends StatelessWidget {
           ),
           Text(
             'Password : $password',
+            style: _customTextStyle(),
+          ),
+          Text(
+            'phone : $phone',
+            style: _customTextStyle(),
+          ),
+          Text(
+            'country : $counry',
+            style: _customTextStyle(),
+          ),
+          Text(
+            'image : $image',
             style: _customTextStyle(),
           ),
           Container(

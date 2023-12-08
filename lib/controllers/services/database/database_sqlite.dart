@@ -7,24 +7,24 @@ class DatabaseSqlite {
   //required [raw , select(id) , seletWhere , insert , update(id) , updateWhere , delete(id?) , join , joinLeft , joinRight]
   Database? db;
   String _tableName = '';
-  int version = 1;
+  int _version = 1;
 
   Future<Database> _connect() async {
     String databasePath = await getDatabasesPath();
     String path = join(databasePath, DATABASE_NAME);
     Database currentDB =
-        await openDatabase(path, onCreate: _onCreate, version: 1);
+        await openDatabase(path, onCreate: _onCreate, version: _version);
     return currentDB;
   }
 
   Future<void> _onCreate(Database db, int version) async {
-    try {
+    try {      
       for (String table in SCHEMA) {
         await db.execute(table);
       }
-      debugPrint("OnCreate : build database [ok]");
+      debugPrint("DatabaseSqlite : build database [ok]");
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('DatabaseSqlite : ${e.toString()}');
     }
   }
 
@@ -35,21 +35,21 @@ class DatabaseSqlite {
     }
   }
 
-  Future initDB() async {
+  Future<void> initDB() async {
     db = db == null ? await _connect() : null;
   }
 
-  Future _dropDatabase() async {
+  Future<void> _dropDatabase() async {
     try {
       await databaseFactory
           .deleteDatabase(join(await getDatabasesPath(), DATABASE_NAME));
-      debugPrint("Drop Database : [ok]");
+      debugPrint("DatabaseSqlite: Drop Database : [ok]");
     } catch (e) {
       debugPrint(e.toString());
     }
   }
 
-  Future recreateDatabase() async {
+  Future<void> recreateDatabase() async {
     await _dropDatabase();
     await _disconnect();
     await initDB();
