@@ -12,8 +12,8 @@ class Language extends StatefulWidget {
 }
 
 class _LanguageState extends State<Language> {
-  //current language selected 
-  int currentSelectedLang = 0 ; 
+  //current language selected
+  int _currentSelectedLang = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +30,13 @@ class _LanguageState extends State<Language> {
             alignment: Alignment.center,
             child: const Text('Select a language'),
           ),
-          ..._LanguageCards(),
+          ..._languageCards(),
         ],
       ),
     );
   }
 
-  List<Widget> _LanguageCards() {
+  List<Widget> _languageCards() {
     List<Widget> cards = [];
     List<Map<String, String>> languageData = [
       {'language': 'English', 'icon': US_FLAG_ICON},
@@ -47,11 +47,11 @@ class _LanguageState extends State<Language> {
     ];
     languageData.asMap().forEach((index, lang) {
       cards.add(InkWell(
-        onTap: () =>setState(() {
-          currentSelectedLang = index;
+        onTap: () => setState(() {
+          _currentSelectedLang = index;
         }),
         child: Card(
-          shape: currentSelectedLang == index ? Border.all() : null ,
+          shape: _currentSelectedLang == index ? Border.all() : null,
           child: ListTile(
             leading: Image.asset(
               lang['icon']!,

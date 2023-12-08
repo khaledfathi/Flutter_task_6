@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_l5/views/screens/category/category_screen.dart';
 import 'package:task_l5/views/screens/profile/profile_screen.dart';
 import 'package:task_l5/views/screens/search/search_screen.dart';
-import 'package:task_l5/views/screens/store_screen/store_screen.dart';
+import 'package:task_l5/views/screens/store/store_screen.dart';
 import 'package:task_l5/views/screens/wish_list/wish_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,28 +14,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-   int index = 0 ; 
+   int _index = 0 ; 
 
   final List<Widget> screens =[
-    StoreScreen(),
-    CategoryScreen(), 
-    SearchScreen(),
-    WishListScreen(),
-    ProfileScreen(),
+    const StoreScreen(),
+    const CategoryScreen(), 
+    const SearchScreen(),
+    const WishListScreen(),
+    const ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: const CustomAppBar(),
-      body:screens[index],
+      body:screens[_index],
       
       bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.red,
           unselectedItemColor: Colors.blue,
-          currentIndex: index,
+          currentIndex: _index,
           onTap: (currentIndex){
-            index = currentIndex ;
+            _index = currentIndex ;
             setState(() {});
           },
           items: const [

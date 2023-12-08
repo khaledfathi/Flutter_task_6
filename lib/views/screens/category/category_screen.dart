@@ -5,6 +5,14 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Text('Category Screen')); 
+    return SafeArea(
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        alignment: Alignment.center,
+        color: Color(0xff0fa189),
+        child: const Text('Category Screen', style: TextStyle(fontSize: 40),),
+        ),
+    ); 
   }
 }

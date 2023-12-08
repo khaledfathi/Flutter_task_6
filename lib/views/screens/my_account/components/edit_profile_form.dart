@@ -4,23 +4,30 @@ import 'package:task_l5/views/shared/custom_text_field_no_label.dart';
 
 class EditProfileForm extends StatelessWidget {
   //input controllers 
-  TextEditingController nameController =TextEditingController(); 
-  TextEditingController emailController =TextEditingController(); 
+  TextEditingController _nameController =TextEditingController(); 
+  TextEditingController _emailController =TextEditingController(); 
   
   TextEditingController? phoneController ;
   TextEditingController? countryController ;
   
 
-  //current user logedin
+  //current user logedi
   String name = Auth().currentUser.name!; 
   String email = Auth().currentUser.email!; 
-  
+  String phone = Auth().currentUser.phone!; 
+  String country = Auth().currentUser.country!; 
+
+  void Function()? onSaveTap; 
+
   EditProfileForm({super.key , 
     this.phoneController , 
     this.countryController,
+    this.onSaveTap,    
   }){
-    nameController.text = name; 
-    emailController.text = email ; 
+    _nameController.text = name; 
+    _emailController.text = email ; 
+    phoneController!.text = phone ; 
+    countryController!.text = country ; 
   }
 
   @override
@@ -30,12 +37,12 @@ class EditProfileForm extends StatelessWidget {
         CustomTextFieldNoLabel(
           hintText: 'Name',
           enable: false,
-          controller: nameController,
+          controller: _nameController,
         ),
         CustomTextFieldNoLabel(
           hintText: 'Email',
           enable: false,
-          controller: emailController,          
+          controller: _emailController,          
         ),
         CustomTextFieldNoLabel(
           hintText: 'Phone',
@@ -48,7 +55,7 @@ class EditProfileForm extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: onSaveTap,
             color: Colors.deepPurpleAccent,
             minWidth: double.infinity,
             height: 50,

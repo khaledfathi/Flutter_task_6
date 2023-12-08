@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsets? margin; 
   final TextEditingController? controller;
   final bool? obscureText ; 
+  final double? height ; 
 
   const CustomTextField({super.key , 
     this.title,
@@ -13,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     this.margin,
     this.controller,
     this.obscureText,
+    this.height
   });
 
   @override
@@ -26,6 +28,7 @@ class CustomTextField extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 10),
             child: Text(title??'Title', style: const TextStyle(color: Colors.black54),) ),
           Container(
+            height: height,
             padding: const EdgeInsets.symmetric(horizontal: 8),
             decoration: const BoxDecoration(              
               color: Colors.white,
@@ -35,7 +38,7 @@ class CustomTextField extends StatelessWidget {
                 BoxShadow(color: Colors.grey ,offset: Offset(-2, -2) , blurRadius: 4),
               ]
             ),
-            child: TextField(              
+            child: TextField(                            
               obscureText: obscureText??false ,
               controller: controller,
               decoration: InputDecoration(
