@@ -9,7 +9,7 @@ class SearchScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('WishList'),
+          title: const Text('Search'),
           centerTitle: true,
           titleTextStyle: const TextStyle(
               fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),

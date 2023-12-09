@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:task_l5/views/screens/home/components/notification_icon.dart';
+import 'package:task_l5/views/screens/store/custom_appbar/notification_icon.dart';
+import 'package:task_l5/views/screens/notification/notification_screen.dart';
+import 'package:task_l5/views/screens/your_cart.dart/your_cart_screen.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
   const CustomAppBar({super.key});
@@ -28,11 +30,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
               flex: 2,
               child: Container(
                   margin: const EdgeInsets.only(right: 10),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      NotificationIcon(),
-                      NotificationIcon(),
+                      NotificationIcon(notificiationCount: '3', iconData: Icons.shopping_cart_checkout_outlined, onTap: (){
+                        Navigator.pushNamed(context, YourCartScreen.route);
+                      },),
+                      NotificationIcon(notificiationCount: '2', iconData: Icons.notification_important_outlined, onTap: (){
+                        Navigator.pushNamed(context, NotificationScreen.route); 
+                      },),
                     ],
                   )),
             ),

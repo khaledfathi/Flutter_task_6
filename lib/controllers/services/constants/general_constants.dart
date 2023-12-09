@@ -22,3 +22,13 @@ const String USER_2_IMAGE = 'assets/images/user_images/user2.jpeg';
 const String USER_3_IMAGE = 'assets/images/user_images/user3.jpeg'; 
 const String USER_4_IMAGE = 'assets/images/user_images/user4.jpeg'; 
 const String USER_5_IMAGE = 'assets/images/user_images/user5.jpeg'; 
+
+//payment icons
+const String APPLE_PAY_ICON = 'assets/images/app_images/apple_pay.png'; 
+const String GOOGLE_PAY_ICON = 'assets/images/app_images/google_pay_icon.png'; 
+const String PAYPAL_ICON = 'assets/images/app_images/paypal_icon.png'; 
+const String VISA_ICON = 'assets/images/app_images/visa_icon.png'; 
+const String MASTER_CARD_ICON = 'assets/images/app_images/master_card_icon.png'; 
+
+//Product Images
+const String LAPTOP_IMAGE = 'assets/images/product_images/laptop.jpeg';

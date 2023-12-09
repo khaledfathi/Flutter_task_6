@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:task_l5/views/screens/my_order/components/order_box.dart';
-import 'package:task_l5/views/shared/container_with_shadow.dart';
 
 class MyOrderScreen extends StatelessWidget {
   static const String route = 'my-order';

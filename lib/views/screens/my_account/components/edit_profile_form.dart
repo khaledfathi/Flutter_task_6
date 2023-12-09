@@ -4,20 +4,20 @@ import 'package:task_l5/views/shared/custom_text_field_no_label.dart';
 
 class EditProfileForm extends StatelessWidget {
   //input controllers 
-  TextEditingController _nameController =TextEditingController(); 
-  TextEditingController _emailController =TextEditingController(); 
+  final TextEditingController _nameController =TextEditingController(); 
+  final TextEditingController _emailController =TextEditingController(); 
   
-  TextEditingController? phoneController ;
-  TextEditingController? countryController ;
+  final TextEditingController? phoneController ;
+  final TextEditingController? countryController ;
   
 
-  //current user logedi
-  String name = Auth().currentUser.name!; 
-  String email = Auth().currentUser.email!; 
-  String phone = Auth().currentUser.phone!; 
-  String country = Auth().currentUser.country!; 
+  //current user logedin
+  final String name = Auth().currentUser.name!; 
+  final String email = Auth().currentUser.email!; 
+  final String phone = Auth().currentUser.phone!; 
+  final String country = Auth().currentUser.country!; 
 
-  void Function()? onSaveTap; 
+  final void Function()? onSaveTap; 
 
   EditProfileForm({super.key , 
     this.phoneController , 

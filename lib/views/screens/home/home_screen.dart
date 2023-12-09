@@ -27,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: const CustomAppBar(),
       body:screens[_index],
       
       bottomNavigationBar: BottomNavigationBar(

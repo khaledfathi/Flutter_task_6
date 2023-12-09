@@ -9,11 +9,12 @@ import 'package:task_l5/views/shared/circleContainer.dart';
 import 'package:task_l5/controllers/services/globals/globals.dart' as globals;
 
 class ProfileBody extends StatefulWidget {
-  MyAccountController controller;
+  final MyAccountController controller;
 
-  double screenWidth;
+  final double screenWidth;
 
-  ProfileBody({super.key, required this.controller, required this.screenWidth});
+  const ProfileBody(
+      {super.key, required this.controller, required this.screenWidth});
 
   @override
   State<ProfileBody> createState() => _ProfileBodyState();
@@ -21,19 +22,15 @@ class ProfileBody extends StatefulWidget {
 
 class _ProfileBodyState extends State<ProfileBody> {
   //globals
-  String _appDir = globals.appDir!;
+  final String _appDir = globals.appDir!;
 
   //input controller
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _countryController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController();
 
   //current user logedin
-  String _id = Auth().currentUser.id!;
-  String _userName = Auth().currentUser.name!;
-  String _userEmail = Auth().currentUser.email!;
-  String _userImage = Auth().currentUser.image!;
-  String _userPhone = Auth().currentUser.phone!;
-  String _userCountry = Auth().currentUser.country!;
+  final String _id = Auth().currentUser.id!;
+  final String _userImage = Auth().currentUser.image!;
 
   //uploaded profile image
   File? _userUploadedImageFile;
@@ -65,15 +62,21 @@ class _ProfileBodyState extends State<ProfileBody> {
                       await ImagePicker()
                           .pickImage(source: ImageSource.camera)
                           .then((fileRecived) async {
-                        file = fileRecived!;
-                        _userUploadedImageFile = File(file!.path);
+                        file = fileRecived;
+                        file == null
+                            ? null
+                            : _userUploadedImageFile = File(file!.path);
                       });
-                      String newPath =
-                          '$_appDir/${file!.name}.${file!.mimeType}';
-                      await _userUploadedImageFile!.copy(newPath).then((file) {
-                        _userUploadedImageFile = file;
-                        setState((){});
-                      });
+                      if (file != null) {
+                        String newPath =
+                            '$_appDir/${file!.name}.${file!.mimeType}';
+                        await _userUploadedImageFile!
+                            .copy(newPath)
+                            .then((file) {
+                          _userUploadedImageFile = file;
+                          setState(() {});
+                        });
+                      }
                     },
                     icon: const Icon(
                       Icons.camera_alt_outlined,
@@ -86,12 +89,14 @@ class _ProfileBodyState extends State<ProfileBody> {
         EditProfileForm(
           phoneController: _phoneController,
           countryController: _countryController,
-          onSaveTap: () async => await widget.controller.updateAccount(
-            Auth().currentUser.id!,
-            phone: _phoneController.text,
-            country: _countryController.text,
-            image: _userUploadedImageFile,
-          ).then((_) => Navigator.pop(context)),
+          onSaveTap: () async => await widget.controller
+              .updateAccount(
+                _id,
+                phone: _phoneController.text,
+                country: _countryController.text,
+                image: _userUploadedImageFile,
+              )
+              .then((_) => Navigator.pop(context)),
         ),
       ],
     );

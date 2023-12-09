@@ -6,6 +6,7 @@ import 'package:task_l5/views/screens/my_account/my_account_screen.dart';
 import 'package:task_l5/views/screens/my_cards/my_cards_screen.dart';
 import 'package:task_l5/views/screens/my_order/my_order_screen.dart';
 import 'package:task_l5/views/screens/settings/settings_screen.dart';
+import 'package:task_l5/views/screens/shipping_address/shipping_address_screen.dart';
 
 
 class ProfileCardOption extends StatefulWidget {
@@ -57,8 +58,10 @@ class _ProfileOptionsState extends State<ProfileCardOption> {
         Card(
           child: ListTile(
             leading: const Icon(Icons.pin_drop_outlined,),
-            title: const Text('Shopping Address'),
-            trailing: IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_forward_ios_rounded)),
+            title: const Text('Shipping Address'),
+            trailing: IconButton(onPressed: (){
+              Navigator.pushNamed(context, ShippinAddressScreen.route);
+            }, icon: const Icon(Icons.arrow_forward_ios_rounded)),
           ),
         ),
         Card(
@@ -77,6 +80,15 @@ class _ProfileOptionsState extends State<ProfileCardOption> {
             trailing: IconButton(onPressed: ()=>Navigator.pushNamed(context, SettingsScreen.route), icon: const Icon(Icons.arrow_forward_ios_rounded)),
           ),
         ),
+       Card(
+          child: ListTile(
+            leading:const Icon(Icons.chat,),
+            title:const  Text('Contact Us'),
+            trailing: IconButton(onPressed: (){
+              Navigator.pushNamed(context, ContactUs.route);
+            }, icon:const Icon(Icons.arrow_forward_ios_rounded)),
+          ),
+        ),
         Card(
           child: ListTile(
             leading:const Icon(Icons.privacy_tip_outlined,),
@@ -90,16 +102,7 @@ class _ProfileOptionsState extends State<ProfileCardOption> {
             title:const  Text('FAQ'),
             trailing: IconButton(onPressed: (){}, icon:const Icon(Icons.arrow_forward_ios_rounded)),
           ),
-        ),
-        Card(
-          child: ListTile(
-            leading:const Icon(Icons.chat,),
-            title:const  Text('Contact Us'),
-            trailing: IconButton(onPressed: (){
-              Navigator.pushNamed(context, ContactUs.route);
-            }, icon:const Icon(Icons.arrow_forward_ios_rounded)),
-          ),
-        ),
+        ), 
         Card(
           child: ListTile(
             leading: const Icon(Icons.logout,),
