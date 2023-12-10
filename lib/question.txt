@@ -1,0 +1,8 @@
+dart: protected attribute ?
+
+flutter : copy files from assets path to app dir path 
+flutter : screen rebuild on back 
+flutter : best way to add / remove  widgets
+flutter : SafeArea make phone bar black (emulator or real device)
+flutter : default safe fonts ? is font size depend on device os ?
+flutter : on users page (FutureBuilder) rebuild whole page problem !

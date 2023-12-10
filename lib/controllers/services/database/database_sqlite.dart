@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:task_l5/controllers/services/constants/database_constants.dart';
+import 'package:task_l5/controllers/services/database/interface/database_core.dart';
 
-class DatabaseSqlite {
+class DatabaseSqlite implements DatabaseCore<DatabaseSqlite>{
   //required [raw , select(id) , seletWhere , insert , update(id) , updateWhere , delete(id?) , join , joinLeft , joinRight]
+  
   Database? db;
   String _tableName = '';
   int _version = 1;
@@ -35,6 +37,7 @@ class DatabaseSqlite {
     }
   }
 
+  @override
   Future<void> initDB() async {
     db = db == null ? await _connect() : null;
   }
@@ -49,17 +52,20 @@ class DatabaseSqlite {
     }
   }
 
+  @override
   Future<void> recreateDatabase() async {
     await _dropDatabase();
     await _disconnect();
     await initDB();
   }
 
+  @override
   DatabaseSqlite table(String table) {
     _tableName = table;
     return this;
   }
 
+  @override
   Future<List<Map<String, Object?>>> select({int? id}) {
     if (id == null) {
       return db!.query(_tableName);
@@ -68,18 +74,22 @@ class DatabaseSqlite {
     }
   }
 
+  @override
   Future<List<Map<String, Object?>>> selectWhere(String where) {
     return db!.query(_tableName, where: where);
   }
 
+  @override
   Future<int> insert(Map<String, Object?> row) async {
     return db!.insert(_tableName, row);
   }
 
+  @override
   Future<int> update(Map<String, Object?> row, int id) async {
     return db!.update(_tableName, row, where: 'id=$id');
   }
 
+  @override
   Future<int> delete({int? id}) async {
     if (id == null) {
       return db!.delete(_tableName);

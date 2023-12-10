@@ -3,8 +3,8 @@ import 'package:task_l5/controllers/services/globals/globals.dart' as globals;
 
 abstract class Model<T>{
   String tableName ;
+  
   Model({required this.tableName}); 
-
   List<T> createQueryModelList(List<Map<String, Object?>> queryResult); 
 
   Future<List<T>> select({int? id}) async {
